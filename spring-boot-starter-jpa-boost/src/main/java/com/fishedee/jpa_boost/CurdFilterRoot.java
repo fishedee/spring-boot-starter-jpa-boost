@@ -1,9 +1,8 @@
-package com.fishedee.jpa_boost.curd;
+package com.fishedee.jpa_boost;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.From;
-import javax.persistence.criteria.Predicate;
 
 /**
  * Created by fish on 2021/4/28.

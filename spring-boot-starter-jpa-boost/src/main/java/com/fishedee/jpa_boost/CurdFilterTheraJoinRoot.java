@@ -1,12 +1,10 @@
-package com.fishedee.jpa_boost.curd;
+package com.fishedee.jpa_boost;
 
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.criteria.*;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.criteria.JoinType;
 
 /**
  * Created by fish on 2021/4/28.

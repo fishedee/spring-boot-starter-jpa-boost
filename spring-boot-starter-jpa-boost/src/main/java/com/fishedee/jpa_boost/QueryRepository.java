@@ -1,6 +1,4 @@
-package com.fishedee.jpa_boost.curd;
-
-import org.springframework.stereotype.Component;
+package com.fishedee.jpa_boost;
 
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;

@@ -1,4 +1,4 @@
-package com.fishedee.jpa_boost.curd;
+package com.fishedee.jpa_boost;
 
 import lombok.Data;
 

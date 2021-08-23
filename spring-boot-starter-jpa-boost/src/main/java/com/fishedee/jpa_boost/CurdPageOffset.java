@@ -1,6 +1,5 @@
-package com.fishedee.jpa_boost.curd;
+package com.fishedee.jpa_boost;
 
-import com.fishedee.jpa_boost.JPABoostException;
 import lombok.ToString;
 
 import java.util.ArrayList;

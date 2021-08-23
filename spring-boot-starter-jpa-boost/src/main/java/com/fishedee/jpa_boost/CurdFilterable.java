@@ -1,6 +1,4 @@
-package com.fishedee.jpa_boost.curd;
-
-import com.fishedee.jpa_boost.curd.CurdFilter;
+package com.fishedee.jpa_boost;
 
 /**
  * Created by fish on 2021/4/27.

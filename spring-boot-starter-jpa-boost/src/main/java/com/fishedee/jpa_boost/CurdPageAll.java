@@ -1,4 +1,4 @@
-package com.fishedee.jpa_boost.curd;
+package com.fishedee.jpa_boost;
 
 /**
  * Created by fish on 2021/4/28.
