@@ -58,14 +58,5 @@ public class CurdTest {
         List<User> userList3 = userRepository.getAll();
         assertEquals(userList3.size(),1);
         assertEquals(userList3.get(0).getName(),"mk");
-
-
     }
-
-    @Test
-    @Transactional
-    public void testQuery(){
-
-    }
-
 }
