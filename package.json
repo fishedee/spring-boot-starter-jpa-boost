@@ -1,0 +1,23 @@
+{
+  "private":true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy":"mvn clean && gh-pages -d spring-boot-starter-jpa-boost -b jitpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fishedee/spring-boot-starter-jpa-boost.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fishedee/spring-boot-starter-jpa-boost/issues"
+  },
+  "homepage": "https://github.com/fishedee/spring-boot-starter-jpa-boost#readme",
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  }
+}
