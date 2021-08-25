@@ -25,7 +25,7 @@ public class JPABoostAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(QueryRepository.class)
     @ConditionalOnProperty(value = "spring.jpa-boost.enable", havingValue = "true")
-    public QueryRepository persistConfigRepository(){
+    public QueryRepository queryRepository(){
         return new QueryRepository();
     }
 }

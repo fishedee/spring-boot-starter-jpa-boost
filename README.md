@@ -22,7 +22,7 @@ JPA的Curd存储库，与查询存储库，功能：
 <dependency>
     <groupId>com.github.fishedee</groupId>
     <artifactId>spring-boot-starter-jpa-boost</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
