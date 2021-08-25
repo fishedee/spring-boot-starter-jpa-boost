@@ -6,7 +6,8 @@
 JPA的Curd存储库，与查询存储库，功能：
 
 * 简单，无配置生成数据存储库
-* 任意查询，支持任意筛选，包括子数据join的查询。
+* 任意筛选，包括子数据join的查询。
+* linter，自带JPA最佳实践的linter
 
 ## 安装
 
@@ -21,7 +22,7 @@ JPA的Curd存储库，与查询存储库，功能：
 <dependency>
     <groupId>com.github.fishedee</groupId>
     <artifactId>spring-boot-starter-jpa-boost</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
 
@@ -151,3 +152,27 @@ public class CurdTest {
 ```
 
 User实体的Curd测试
+
+```java
+
+/**
+ * Hello world!
+ *
+ */
+@SpringBootApplication
+@EnableTransactionManagement(proxyTargetClass = true)
+@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableJPALint(
+        allowIdHaveGeneratedValue = true,
+        extraLinters = {MyJPALinter.class}
+)
+public class App 
+{
+    public static void main( String[] args )
+    {
+        SpringApplication.run(App.class,args);
+    }
+}
+```
+
+可以使用@EnableJPALint来检查JPA的使用是否满足最佳实践
