@@ -7,6 +7,7 @@ JPA的Curd存储库，与查询存储库，功能：
 
 * 简单，无配置生成数据存储库
 * 任意筛选，包括子数据join的查询。
+* 分页与总数，分页与总数都能在一个API中完成，而且内部做了优化，在某些情况下能避免对count语句的sql请求
 * linter，自带JPA最佳实践的linter
 
 ## 安装
@@ -22,7 +23,7 @@ JPA的Curd存储库，与查询存储库，功能：
 <dependency>
     <groupId>com.github.fishedee</groupId>
     <artifactId>spring-boot-starter-jpa-boost</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
 </dependency>
 ```
 

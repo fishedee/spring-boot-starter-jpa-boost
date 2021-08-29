@@ -1,5 +1,7 @@
 package com.fishedee.jpa_boost;
 
+import com.fishedee.reflection_boost.GenericActualArgumentExtractor;
+import com.fishedee.reflection_boost.GenericFormalArgumentFiller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +16,6 @@ import java.util.*;
  * Created by fish on 2021/4/16.
  */
 public class CurdRepository<T,U extends Serializable> {
-
     @Autowired
     private QueryRepository queryRepository;
 
@@ -35,8 +36,8 @@ public class CurdRepository<T,U extends Serializable> {
 
     @PostConstruct
     public void init(){
-        ParameterizedType ptype = (ParameterizedType) this.getClass().getGenericSuperclass();
-        itemClass = (Class<T>) ptype.getActualTypeArguments()[0];
+        GenericActualArgumentExtractor extractor = new GenericActualArgumentExtractor(getClass(),CurdRepository.class);
+        itemClass = extractor.getActualType(0);
         Metamodel metadata = entityManager.getMetamodel();
         entityName = metadata.entity(itemClass).getName();
 

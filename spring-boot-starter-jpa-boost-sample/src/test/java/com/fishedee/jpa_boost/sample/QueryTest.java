@@ -61,5 +61,30 @@ public class QueryTest {
         JsonAssertUtil.checkEqualNotStrict("{id:6,customName:\"fish_5\",address:\"addr_5\"}",salesOrderPage2.getData().get(0));
     }
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    @Transactional
+    public void testQueryCount(){
+        //添加
+        for(int i = 0 ;i !=100;i++){
+            User user = new User("user_"+i,(long)i);
+            userRepository.add(user);
+        }
+
+        for( int i = 0 ;i != 1000;i++){
+            CurdFilterBuilder builder = new CurdFilterBuilder();
+            Page<List<User>> users = queryRepository.findByFilter(User.class,builder,new CurdPageOffset(i,10).withCount());
+            assertEquals(100,users.getCount());
+        }
+
+        for( int i = 1 ;i != 1000;i++){
+            CurdFilterBuilder builder = new CurdFilterBuilder();
+            Page<List<User>> users = queryRepository.findByFilter(User.class,builder,new CurdPageOffset(0,i).withCount());
+            assertEquals(100,users.getCount());
+        }
+    }
+
 }
 

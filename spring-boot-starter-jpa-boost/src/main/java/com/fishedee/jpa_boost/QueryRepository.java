@@ -55,6 +55,16 @@ public class QueryRepository {
         if( pageable.shouldPage() ){
             //分页的话设置偏移量
             result.setOffset(pageable.getPageIndex(),pageable.getPageSize());
+            if( pageable.getPageIndex() > 0 && pageable.getPageSize() > data.size() &&
+                data.size() > 0 ){
+                //非首页
+                //分页的情况下，实际数据少于希望拉取的数据，证明是最后一页了，不需要进行拉取count操作
+                result.setCount(pageable.getPageIndex()+data.size());
+            }
+            if( pageable.getPageIndex() == 0 && pageable.getPageSize() > data.size()){
+                //首页
+                result.setCount(data.size());
+            }
         }else{
             //不需要分页的话,设置总数
             result.setCount(data.size());
