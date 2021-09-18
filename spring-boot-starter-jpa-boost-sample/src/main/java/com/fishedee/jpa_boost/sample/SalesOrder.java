@@ -58,6 +58,9 @@ public class SalesOrder {
     @Transient
     private UserRepository userRepository3;
 
+    @Transient
+    private List<UserRepository> userRepository4;
+
     protected SalesOrder(){
 
     }
