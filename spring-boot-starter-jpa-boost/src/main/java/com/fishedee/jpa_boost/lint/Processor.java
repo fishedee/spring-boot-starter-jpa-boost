@@ -124,7 +124,8 @@ public class Processor {
                 if( field.hasTransitAnnotation() ){
                     //略过属性
                     field.shouldHaveJsonIgnoreAnnotation();
-                    field.shouldHaveAutowiredAnnotation();
+                    //可以不加入Autowired属性
+                    //field.shouldHaveAutowiredAnnotation();
                 }else{
                     //非略过属性
                     field.shouldSatifyDbType();

@@ -1,9 +1,11 @@
 package com.fishedee.jpa_boost.sample;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -43,6 +45,15 @@ public class SalesOrder {
     @Fetch(FetchMode.SELECT)
     @OrderColumn
     private List<Item> items = new ArrayList<>();
+
+    @Transient
+    @JsonIgnore
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transient
+    @JsonIgnore
+    private UserRepository userRepository2;
 
     protected SalesOrder(){
 
