@@ -55,6 +55,9 @@ public class SalesOrder {
     @JsonIgnore
     private UserRepository userRepository2;
 
+    @Transient
+    private UserRepository userRepository3;
+
     protected SalesOrder(){
 
     }

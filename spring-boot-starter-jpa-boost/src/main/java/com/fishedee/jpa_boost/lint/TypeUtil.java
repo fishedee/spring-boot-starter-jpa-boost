@@ -13,6 +13,8 @@ public class TypeUtil {
     static {
         dbType.add(BigDecimal.class);
         dbType.add(BigInteger.class);
+        dbType.add(byte.class);
+        dbType.add(Byte.class);
         dbType.add(Short.class);
         dbType.add(short.class);
         dbType.add(Integer.class);

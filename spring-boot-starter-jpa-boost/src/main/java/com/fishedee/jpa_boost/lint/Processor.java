@@ -122,8 +122,8 @@ public class Processor {
             }else{
                 //基础属性
                 if( field.hasTransitAnnotation() ){
-                    //略过属性
-                    field.shouldHaveJsonIgnoreAnnotation();
+                    //可以不加入JsonIgnore属性
+                    //field.shouldHaveJsonIgnoreAnnotation();
                     //可以不加入Autowired属性
                     //field.shouldHaveAutowiredAnnotation();
                 }else{
