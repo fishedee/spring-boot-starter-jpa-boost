@@ -104,19 +104,24 @@ public class Processor {
                 continue;
             }
             //检查属性
-            if( field.isListType()){
+            if( field.isListType() &&
+                    field.hasTransitAnnotation() == false){
                 //list属性
                 processListField(field);
-            }else if( field.isSetType() ){
+            }else if( field.isSetType() &&
+                    field.hasTransitAnnotation() == false ){
                 //set属性
                 processSetField(field);
-            }else if( field.isMapType() ){
+            }else if( field.isMapType() &&
+                    field.hasTransitAnnotation() == false){
                 //map属性
                 processMapField(field);
-            }else if( field.isEnumType()){
+            }else if( field.isEnumType() &&
+                    field.hasTransitAnnotation() == false){
                 //enum属性
                 processEnumField(field);
-            }else if( field.hasJsonUnwrappedAnnotation()){
+            }else if( field.hasJsonUnwrappedAnnotation() &&
+                    field.hasTransitAnnotation() == false){
                 //embeddable属性
                 processEmbeddableField(field);
             }else{
