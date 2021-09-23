@@ -248,8 +248,9 @@ public class CurdFilterBuilder implements CurdFilter,CurdFilterable{
         });
         return this;
     }
-
     public CurdFilterBuilder or(CurdFilter filter){
+
+
         this.predicates.add(new CurdAndFilterCallback() {
             @Override
             public Predicate filter(CriteriaQuery query,CriteriaBuilder cb, From root) {
@@ -257,6 +258,10 @@ public class CurdFilterBuilder implements CurdFilter,CurdFilterable{
             }
         });
         return this;
+    }
+
+    public CurdFilterBuilderRoot root(){
+        return new CurdFilterBuilderRoot();
     }
 
     public CurdFilterRoot innerJoin(String name){

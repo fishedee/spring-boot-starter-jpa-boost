@@ -3,6 +3,7 @@ package com.fishedee.jpa_boost;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.criteria.*;
+import javax.persistence.metamodel.SingularAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +54,12 @@ public class CurdFilterTheraJoinRoot implements CurdFilterRoot{
         return result;
     }
 
-    public CurdFilterExpression get(String name){
-        return new CurdFilterColumnExpression(this,name);
+    @Override
+    public CurdFilterColumnExpression get(String name){
+        return new CurdFilterColumnExpression(this,new CurdFilterColumnExpression.Attribute(name));
     }
-}
+
+    @Override
+    public CurdFilterColumnExpression get(SingularAttribute attribute){
+        return new CurdFilterColumnExpression(this,new CurdFilterColumnExpression.Attribute(attribute));
+    }}
