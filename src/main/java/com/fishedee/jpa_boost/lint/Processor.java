@@ -104,6 +104,9 @@ public class Processor {
                 continue;
             }
             //检查属性
+            if( field.shouldIgnoreLint() ){
+                continue;
+            }
             if( field.isListType() &&
                     field.hasTransitAnnotation() == false){
                 //list属性
