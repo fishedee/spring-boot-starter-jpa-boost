@@ -34,6 +34,10 @@ public class FieldWrapper {
         return Modifier.isPrivate(this.field.getModifiers());
     }
 
+    public boolean shouldIgnoreLint(){
+        JPALintIgnore jpaLintIgnore = this.field.getAnnotation(JPALintIgnore.class);
+        return jpaLintIgnore != null;
+    }
     public void shouldNotSynthetic(){
         new Assert(this.clazz.getName()).assertFalse(" should be static access ",field.isSynthetic());
     }

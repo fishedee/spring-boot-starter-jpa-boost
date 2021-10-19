@@ -133,7 +133,7 @@ public class CurdRepository<T,U extends Serializable> {
         return this.getBatch(id,false,false);
     }
 
-    public List<T> getBatchForReady(Collection<U> id){
+    public List<T> getBatchForRead(Collection<U> id){
         return this.getBatch(id,true,false);
     }
 

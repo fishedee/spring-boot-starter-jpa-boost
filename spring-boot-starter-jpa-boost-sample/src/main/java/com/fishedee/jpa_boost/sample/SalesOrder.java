@@ -1,6 +1,7 @@
 package com.fishedee.jpa_boost.sample;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fishedee.jpa_boost.lint.JPALintIgnore;
 import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
@@ -41,8 +42,9 @@ public class SalesOrder {
 
     private String address;
 
+    @JPALintIgnore
     @ElementCollection(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
+    //@Fetch(FetchMode.SELECT)
     @OrderColumn
     private List<Item> items = new ArrayList<>();
 
