@@ -43,6 +43,17 @@ public class CurdFilterBuilder implements CurdFilter,CurdFilterable{
         return this;
     }
 
+    public CurdFilterBuilder notEqual(String name, Object arg){
+        this.predicates.add(new CurdAndFilterCallback() {
+            @Override
+            public Predicate filter(CriteriaQuery query,CriteriaBuilder cb, From root) {
+                return cb.notEqual(root.get(name),arg);
+            }
+        });
+        return this;
+    }
+
+
     //只有当前包的其他类可以用
     void addPrePredicate(Predicate single){
         this.prePredicates.add(single);
@@ -53,6 +64,16 @@ public class CurdFilterBuilder implements CurdFilter,CurdFilterable{
             @Override
             public Predicate filter(CriteriaQuery query,CriteriaBuilder cb, From root) {
                 return cb.equal(expression.getExpression(query,cb,root),arg);
+            }
+        });
+        return this;
+    }
+
+    public CurdFilterBuilder notEqual(CurdFilterExpression expression, Object arg){
+        this.predicates.add(new CurdAndFilterCallback() {
+            @Override
+            public Predicate filter(CriteriaQuery query,CriteriaBuilder cb, From root) {
+                return cb.notEqual(expression.getExpression(query,cb,root),arg);
             }
         });
         return this;

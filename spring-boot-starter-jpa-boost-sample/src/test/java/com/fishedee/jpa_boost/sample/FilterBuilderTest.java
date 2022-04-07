@@ -62,6 +62,18 @@ public class FilterBuilderTest {
         assertIterableEquals(target,contactList);
     }
 
+
+    @Test
+    @Sql("classpath:/init.sql")
+    public void notEqual(){
+        CurdFilterBuilder builder = new CurdFilterBuilder();
+        builder.notEqual("contactCategoryName","广州");
+        List<Contact> contactList = queryRepository.findByFilter(Contact.class,builder,new CurdPageAll()).getData();
+
+        List<Contact> target = Arrays.asList(this.contactMap.get(1001L),this.contactMap.get(1003L),this.contactMap.get(1004L));
+        assertIterableEquals(target,contactList);
+    }
+
     @Test
     @Sql("classpath:/init.sql")
     public void equalNested(){
