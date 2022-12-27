@@ -31,7 +31,8 @@ public class FieldWrapper {
     }
 
     public boolean isPrivateAccess(){
-        return Modifier.isPrivate(this.field.getModifiers());
+        //支持private与package作用域
+        return !Modifier.isPublic(this.field.getModifiers()) ;
     }
 
     public boolean shouldIgnoreLint(){
