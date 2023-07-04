@@ -123,6 +123,9 @@ public class CurdRepository<T,U extends Serializable> {
     }
 
     protected T tryGet(U id){
+        if( this.entityManager.isJoinedToTransaction() == false ){
+            return null;
+        }
         Session session = this.entityManager.unwrap(Session.class);
         SessionImplementor sessionImplementor = session.unwrap(SessionImplementor.class);
         EntityPersister entityPersister = sessionImplementor.getFactory().getEntityPersister( this.itemClass.getName());

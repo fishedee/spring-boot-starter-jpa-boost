@@ -189,4 +189,13 @@ public class FilterBuilderTest {
         List<Contact> target = Arrays.asList(this.contactMap.get(1003L));
         assertIterableEquals(target,contactList);
     }
+
+    @Test
+    @Sql("classpath:/init.sql")
+    public void getBatch(){
+        List<Contact> contactList = contactRepository.getBatch(Arrays.asList(1001L,1003L,1001L));
+
+        List<Contact> target = Arrays.asList(this.contactMap.get(1001L),this.contactMap.get(1003L));
+        assertIterableEquals(target,contactList);
+    }
 }
