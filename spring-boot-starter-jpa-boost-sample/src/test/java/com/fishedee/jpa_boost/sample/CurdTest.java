@@ -14,6 +14,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,6 +46,10 @@ public class CurdTest {
 
         //查询
         List<User> iNameList = userRepository.getByName("i");
+        JsonAssertUtil.checkEqualStrict("[{id:1,name:\"fish\",age:123}]",iNameList);
+
+        //查询getBatch
+        List<User> batchList = userRepository.getBatch(Arrays.asList(1L,1L));
         JsonAssertUtil.checkEqualStrict("[{id:1,name:\"fish\",age:123}]",iNameList);
 
         //删除

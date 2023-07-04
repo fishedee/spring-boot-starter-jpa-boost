@@ -2,6 +2,11 @@ package com.fishedee.jpa_boost;
 
 import com.fishedee.reflection_boost.GenericActualArgumentExtractor;
 import com.fishedee.reflection_boost.GenericFormalArgumentFiller;
+import org.hibernate.EntityMode;
+import org.hibernate.Session;
+import org.hibernate.engine.spi.EntityKey;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.persister.entity.EntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -117,6 +122,41 @@ public class CurdRepository<T,U extends Serializable> {
         return result;
     }
 
+    protected T tryGet(U id){
+        Session session = this.entityManager.unwrap(Session.class);
+        SessionImplementor sessionImplementor = session.unwrap(SessionImplementor.class);
+        EntityPersister entityPersister = sessionImplementor.getFactory().getEntityPersister( this.itemClass.getName());
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = sessionImplementor.getPersistenceContext();
+        EntityKey entityKey = new EntityKey( id, entityPersister );
+        return (T)persistenceContext.getEntity(entityKey);
+    }
+
+    protected List<T> getBatchNoReadAndNoLock(Collection<U> ids){
+        Set<U> idSet = new HashSet<>();
+        List<T> result = new ArrayList<>();
+        for( U id:ids){
+            //不重复加入到list中
+            if( idSet.contains(id)){
+                continue;
+            }
+            idSet.add(id);
+            //尝试从缓存中获取
+            T temp = this.tryGet(id);
+            if(temp == null){
+                //要么不在缓存中，要么该数据本来就不存在
+                //其中一个不行，则整个放弃
+                result = null;
+                break;
+            }
+            result.add(temp);
+        }
+        if( result != null ){
+            return result;
+        }else{
+            return this.getBatch(ids,false,false);
+        }
+    }
+
     protected List<T> getBatch(Collection<U> ids,boolean shouldReadOnly,boolean shouldLock){
         Query query = entityManager.createQuery("select i from "+entityName+" i where i.id in (:ids)")
                 .setParameter("ids",ids);
@@ -130,7 +170,7 @@ public class CurdRepository<T,U extends Serializable> {
     }
 
     public List<T> getBatch(Collection<U> id){
-        return this.getBatch(id,false,false);
+        return this.getBatchNoReadAndNoLock(id);
     }
 
     public List<T> getBatchForRead(Collection<U> id){
