@@ -4,7 +4,7 @@
 
   <groupId>com.fishedee.jpa_boost</groupId>
   <artifactId>spring-boot-starter-jpa-boost</artifactId>
-  <version>1.10</version>
+  <version>1.11</version>
   <packaging>jar</packaging>
 
   <name>spring-boot-starter-jpa-boost</name>
