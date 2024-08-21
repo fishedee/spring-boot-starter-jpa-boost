@@ -59,6 +59,13 @@ public class QueryTest {
         Page<List<SalesOrder>> salesOrderPage2 = queryRepository.findByFilter(SalesOrder.class,builder2,new CurdPageOffset(5,10).withCount());
         JsonAssertUtil.checkEqualNotStrict("{pageIndex:5,pageSize:10,count:100}",salesOrderPage2);
         JsonAssertUtil.checkEqualNotStrict("{id:6,customName:\"fish_5\",address:\"addr_5\"}",salesOrderPage2.getData().get(0));
+
+        //任意查询，分页+排序
+        CurdFilterBuilder builder3 = new CurdFilterBuilder();
+        builder3.like("customName","%fish%");
+        Page<List<SalesOrder>> salesOrderPage3 = queryRepository.findByFilter(SalesOrder.class,builder3,new CurdPageOffset(5,10).withCount().withSort(" id asc,customName desc"));
+        JsonAssertUtil.checkEqualNotStrict("{pageIndex:5,pageSize:10,count:100}",salesOrderPage3);
+        JsonAssertUtil.checkEqualNotStrict("{id:6,customName:\"fish_5\",address:\"addr_5\"}",salesOrderPage3.getData().get(0));
     }
 
     @Autowired

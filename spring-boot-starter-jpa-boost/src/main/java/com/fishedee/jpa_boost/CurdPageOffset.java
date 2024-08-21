@@ -1,9 +1,12 @@
 package com.fishedee.jpa_boost;
 
 import lombok.ToString;
+import org.apache.logging.log4j.util.Strings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by fish on 2021/4/27.
@@ -73,15 +76,21 @@ public class CurdPageOffset implements Pageable {
             }
             String orderDirection = "asc";
             String orderColumn  = "";
-            String[] orderInfo =single.split(" ");
-            if( orderInfo.length == 1 ){
+            List<String> orderInfo = Arrays.stream(single.split(" ")).map(single2->{
+                return single2.trim();
+            }).filter(single2->{
+                return single2.isEmpty() == false;
+            }).collect(Collectors.toList());
+            if( orderInfo.size() == 1 ){
                 orderDirection = "asc";
-                orderColumn = orderInfo[0];
-            }else if( orderInfo.length == 2){
-                orderDirection = orderInfo[1];
-                orderColumn =orderInfo[0];
+                orderColumn = orderInfo.get(0);
+            }else if( orderInfo.size() == 2){
+                orderDirection = orderInfo.get(1);
+                orderColumn = orderInfo.get(0);
             }else{
-                throw new JPABoostException(1,"不合法的排序输入:"+sort,null);
+                orderDirection = orderInfo.get(orderInfo.size() - 1);
+                orderInfo.remove(orderInfo.size() - 1);
+                orderColumn = Strings.join(orderInfo,' ');
             }
 
             //添加排序
